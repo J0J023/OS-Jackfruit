@@ -79,7 +79,6 @@ That workflow only performs CI-safe checks:
 
 The CI-safe build command is:
 
-```bash
 make -C boilerplate ci
 ```
 
