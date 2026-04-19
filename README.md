@@ -69,11 +69,18 @@ engine stop <id>
 ![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/monitor.ko.png?raw=true)
 ![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/dev.png?raw=true)
 #### task2: containers metadata using ps
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/ps_metadata.png?raw=true)
 #### task3: logging output of cpu_hog
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/logs.png?raw=true)
 #### task4: CLI to supervisor IPC communication
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/supervisor.png?raw=true)
 #### task5:  Soft and hard memory limit enforcement
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/soft_hard.png?raw=true)
 #### task6: Scheduling Experiment results
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/stop_engine.png?raw=true)
 #### task7: clean the teardown with no zombie processes
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/inspect.png?raw=true)
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/unload_module.png?raw=true)
 
 
 # Engineering Analysis
