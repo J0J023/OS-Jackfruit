@@ -65,6 +65,9 @@ engine stop <id>
 
 ### RESULTS
 #### task1:  Multiple containers running under supervisor
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/make.png?raw=true)
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/monitor.ko.png?raw=true)
+![image alt](https://github.com/JagritiM123/OS-Jackfruit/blob/main/dev.png?raw=true)
 #### task2: containers metadata using ps
 #### task3: logging output of cpu_hog
 #### task4: CLI to supervisor IPC communication
