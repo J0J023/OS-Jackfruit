@@ -63,12 +63,14 @@ engine logs <id>
 engine stop <id>
 ```
 
-## What to Do Next
+### RESULTS
+# task1:  Multiple containers running under supervisor
+# task2: containers metadata using ps
+# task3: logging output of cpu_hog
+# task4: CLI to supervisor IPC communication
+# task5:  Soft and hard memory limit enforcement
+# task6: Scheduling Experiment results
+# task7: clean the teardown with no zombie processes
 
-Read [`project-guide.md`](project-guide.md) end to end. It contains:
 
-- The six implementation tasks (multi-container runtime, CLI, logging, kernel monitor, scheduling experiments, cleanup)
-- The engineering analysis you must write
-- The exact submission requirements, including what your `README.md` must contain (screenshots, analysis, design decisions)
 
-Your fork's `README.md` should be replaced with your own project documentation as described in the submission package section of the project guide. (As in get rid of all the above content and replace with your README.md)
