@@ -36,55 +36,32 @@ This guide provides **step-by-step instructions** to reproduce the setup from sc
 
 ---
 
-##  2. Initial Setup
+### Architecture Overview
 
-### Update system
-```bash
-sudo apt update && sudo apt upgrade -y
+The runtime is a single binary (`engine`) used in two ways:
 
-### 5. Understand the Boilerplate
+1. **Supervisor daemon** — started once with `engine supervisor ./rootfs-base`. It stays alive, manages containers, and owns the logging pipeline.
+2. **CLI client** — each command like `engine start alpha ./rootfs-alpha /bin/sh` is a short-lived process that sends a request to the running supervisor and prints the response.
 
-The `boilerplate/` folder contains starter files:
-```
-| File                   | Purpose                                             |
-| ---------------------- | --------------------------------------------------- |
-| `engine.c`             | User-space runtime and supervisor skeleton          |
-| `monitor.c`            | Kernel module skeleton                              |
-| `monitor_ioctl.h`      | Shared ioctl command definitions                    |
-| `Makefile`             | Build targets for both user-space and kernel module |
-| `cpu_hog.c`            | CPU-bound test workload                             |
-| `io_pulse.c`           | I/O-bound test workload                             |
-| `memory_hog.c`         | Memory-consuming test workload                      |
-| `environment-check.sh` | VM environment preflight check                      |
-```
-Use these as your starting point. You are free to restructure the repository however you want — the submission requirements are listed in the project guide.
+The CLI process connects to the supervisor over an IPC control channel, sends a command, receives a response, and exits. The supervisor, upon receiving a `start` command, calls `clone()` to create a new container child process with its own namespaces. Each container's stdout and stderr are connected back to the supervisor via pipes, which feed into the bounded-buffer logging pipeline.
 
-### 6. Build and Verify
+There are two separate IPC paths in this project:
+
+- **Path A (logging):** Container stdout/stderr → Supervisor, via pipes. Described in Task 3.
+- **Path B (control):** CLI process → Supervisor, via a UNIX domain socket, FIFO, or shared-memory channel. Described in Task 2.
+
+### CLI Contract
+
+Use this exact command interface:
 
 ```bash
-cd boilerplate
-make
-
-If this compiles without errors, your environment is ready.
-
-### 7. GitHub Actions Smoke Check
-
-Your fork will inherit a minimal GitHub Actions workflow from this repository.
-
-That workflow only performs CI-safe checks:
-
-- `make -C boilerplate ci`
-- user-space binary compilation (`engine`, `memory_hog`, `cpu_hog`, `io_pulse`)
-- `./boilerplate/engine` with no arguments must print usage and exit with a non-zero status
-
-The CI-safe build command is:
-
-make -C boilerplate ci
+engine supervisor <base-rootfs>
+engine start <id> <container-rootfs> <command> [--soft-mib N] [--hard-mib N] [--nice N]
+engine run   <id> <container-rootfs> <command> [--soft-mib N] [--hard-mib N] [--nice N]
+engine ps
+engine logs <id>
+engine stop <id>
 ```
-
-This smoke check does not test kernel-module loading, supervisor runtime behavior, or container execution.
-
----
 
 ## What to Do Next
 
